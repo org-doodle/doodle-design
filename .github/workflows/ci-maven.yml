@@ -1,0 +1,41 @@
+name: CI Maven
+
+on:
+  push:
+    branches: main
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'maven'
+
+      - name: Checkout doodle-build
+        uses: actions/checkout@v3
+        with:
+          repository: org-doodle/doodle-build
+          path: org-doodle/doodle-build
+      - name: Install doodle-build
+        run: ./mvnw install
+        working-directory: org-doodle/doodle-build
+
+      - name: Checkout doodle-boot
+        uses: actions/checkout@v3
+        with:
+          repository: org-doodle/doodle-boot
+          path: org-doodle/doodle-boot
+      - name: Install doodle-boot
+        run: ./mvnw install
+        working-directory: org-doodle/doodle-boot
+
+      - name: Checkout coding style
+        run: ./mvnw spotless:check
+
+      - name: Build with Maven
+        run: ./mvnw package -B
