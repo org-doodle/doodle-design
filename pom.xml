@@ -14,5 +14,6 @@
   <packaging>pom</packaging>
   <modules>
     <module>doodle-design-bom</module>
+    <module>doodle-design-data</module>
   </modules>
 </project>
