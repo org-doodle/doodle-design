@@ -15,6 +15,6 @@
  */
 package org.doodle.design.data.role;
 
-public abstract class Role<BaseT extends RoleBase<? extends RoleProfile>> {
-  protected abstract BaseT base();
+public abstract class Role<RoleBaseT extends RoleBase<? extends RoleProfile>> {
+  protected abstract RoleBaseT base();
 }
