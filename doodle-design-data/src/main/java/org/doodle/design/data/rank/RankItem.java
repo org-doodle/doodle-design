@@ -13,15 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.doodle.design.data.guild;
+package org.doodle.design.data.rank;
 
-import lombok.Data;
-import org.doodle.design.data.rank.Rank;
+import org.doodle.design.data.BaseDocument;
 
-@Data
-public abstract class GuildRank<
-        GuildProfileT extends GuildProfile, GuildRankT extends GuildRank<GuildProfileT, ?>>
-    extends Rank<GuildRankT> {
-
-  protected GuildProfileT profile;
-}
+public abstract class RankItem<RankItemT extends RankItem<?>> extends BaseDocument
+    implements Comparable<RankItemT> {}

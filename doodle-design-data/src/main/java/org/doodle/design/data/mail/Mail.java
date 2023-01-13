@@ -15,6 +15,8 @@
  */
 package org.doodle.design.data.mail;
 
+import lombok.Data;
 import org.doodle.design.data.BaseDocument;
 
+@Data
 public abstract class Mail extends BaseDocument {}

@@ -15,6 +15,9 @@
  */
 package org.doodle.design.data.role;
 
+import lombok.Data;
+
+@Data
 public abstract class Role<RoleBaseT extends RoleBase<? extends RoleProfile>> {
   protected abstract RoleBaseT base();
 }

@@ -13,14 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.doodle.design.data.rank;
+package org.doodle.design.data.role;
 
-import java.util.List;
 import lombok.Data;
-import org.doodle.design.data.BaseDocument;
+import org.doodle.design.data.rank.RankItem;
 
 @Data
-public abstract class Rank<RankItemT extends RankItem<?>> extends BaseDocument {
+public abstract class RoleRankItem<
+        RoleProfileT extends RoleProfile, RoleRankItemT extends RoleRankItem<RoleProfileT, ?>>
+    extends RankItem<RoleRankItemT> {
 
-  protected List<RankItemT> items;
+  protected RoleProfileT profile;
 }

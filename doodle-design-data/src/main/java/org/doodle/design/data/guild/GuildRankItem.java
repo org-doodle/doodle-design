@@ -13,15 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.doodle.design.data.role;
+package org.doodle.design.data.guild;
 
 import lombok.Data;
-import org.doodle.design.data.rank.Rank;
+import org.doodle.design.data.rank.RankItem;
 
 @Data
-public abstract class RoleRank<
-        RoleProfileT extends RoleProfile, RoleRankT extends RoleRank<RoleProfileT, ?>>
-    extends Rank<RoleRankT> {
+public abstract class GuildRankItem<
+        GuildProfileT extends GuildProfile, GuildRankItemT extends GuildRankItem<GuildProfileT, ?>>
+    extends RankItem<GuildRankItemT> {
 
-  protected RoleProfileT profile;
+  protected GuildProfileT profile;
 }
