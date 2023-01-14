@@ -6,16 +6,14 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.doodle</groupId>
-    <artifactId>doodle-design-bom</artifactId>
+    <artifactId>doodle-design</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <relativePath>doodle-design-bom/pom.xml</relativePath>
+    <relativePath>../pom.xml</relativePath>
   </parent>
-  <artifactId>doodle-design</artifactId>
+  <artifactId>doodle-design-framework</artifactId>
   <packaging>pom</packaging>
   <modules>
-    <module>doodle-design-bom</module>
-    <module>doodle-design-component</module>
-    <module>doodle-design-framework</module>
-    <module>doodle-design-module</module>
+    <module>doodle-design-messaging</module>
+    <module>doodle-design-routing</module>
   </modules>
 </project>
