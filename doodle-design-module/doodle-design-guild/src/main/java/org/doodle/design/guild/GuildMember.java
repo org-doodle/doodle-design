@@ -15,4 +15,7 @@
  */
 package org.doodle.design.guild;
 
+import lombok.Data;
+
+@Data
 public abstract class GuildMember {}

@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.doodle.design.guild;
+package org.doodle.design.task;
 
 import lombok.Data;
 
 @Data
-public abstract class GuildProfile {}
+public abstract class RoleTask {}
