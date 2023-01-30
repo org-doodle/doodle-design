@@ -15,6 +15,7 @@
  */
 package org.doodle.design.messaging;
 
+import java.nio.ByteBuffer;
 import lombok.experimental.UtilityClass;
 import org.springframework.core.io.buffer.DataBuffer;
 
@@ -22,7 +23,10 @@ import org.springframework.core.io.buffer.DataBuffer;
 public class PacketPayloadUtils {
 
   public PacketPayload createPayload(DataBuffer dataBuffer) {
-    // TODO: 2023/1/30 add implementation
-    return null;
+    return DefaultPacketPayload.create(asByteBuffer(dataBuffer));
+  }
+
+  static ByteBuffer asByteBuffer(DataBuffer dataBuffer) {
+    return dataBuffer.toByteBuffer();
   }
 }

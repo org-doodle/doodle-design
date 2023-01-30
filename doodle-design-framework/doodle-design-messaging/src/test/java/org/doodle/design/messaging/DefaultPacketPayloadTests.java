@@ -15,33 +15,16 @@
  */
 package org.doodle.design.messaging;
 
-import io.netty.buffer.ByteBuf;
-import java.nio.ByteBuffer;
-import java.nio.charset.StandardCharsets;
+import java.util.Objects;
+import org.junit.Test;
+import org.springframework.util.Assert;
 
-public interface PacketPayload {
+public class DefaultPacketPayloadTests {
 
-  ByteBuf metadata();
-
-  ByteBuf sliceMetadata();
-
-  ByteBuf data();
-
-  ByteBuf sliceData();
-
-  default ByteBuffer getMetadata() {
-    return sliceMetadata().nioBuffer();
-  }
-
-  default String getMetadataUtf8() {
-    return sliceMetadata().toString(StandardCharsets.UTF_8);
-  }
-
-  default ByteBuffer getData() {
-    return sliceData().nioBuffer();
-  }
-
-  default String getDataUtf8() {
-    return sliceData().toString(StandardCharsets.UTF_8);
+  @Test
+  public void testUtf8() {
+    DefaultPacketPayload payload = DefaultPacketPayload.create("d", "m");
+    Assert.isTrue(Objects.equals(payload.getDataUtf8(), "d"), "Unexpected data");
+    Assert.isTrue(Objects.equals(payload.getMetadataUtf8(), "m"), "Unexpected metadata");
   }
 }
