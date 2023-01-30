@@ -16,20 +16,43 @@
 package org.doodle.design.messaging;
 
 import java.lang.annotation.*;
+import org.springframework.core.annotation.AliasFor;
 
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface PacketMapping {
 
-  Protocol[] inbound() default {};
+  Inbound inbound() default @Inbound;
 
-  Protocol[] outbound() default {};
+  Outbound outbound() default @Outbound;
 
-  @Retention(RetentionPolicy.RUNTIME)
   @Target({})
-  @interface Protocol {
+  @Retention(RetentionPolicy.RUNTIME)
+  @interface Inbound {
     short value() default 0;
+
+    Class<?> target() default Object.class;
+  }
+
+  @Target({})
+  @Retention(RetentionPolicy.RUNTIME)
+  @interface Outbound {
+    short value() default 0;
+
+    Protocol[] targets() default {};
+  }
+
+  @Target({})
+  @Retention(RetentionPolicy.RUNTIME)
+  @interface Protocol {
+
+    short value() default 0;
+
+    short group() default 0;
+
+    @AliasFor("value")
+    short cmd() default 0;
 
     Class<?> target() default Object.class;
   }

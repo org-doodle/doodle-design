@@ -23,6 +23,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import org.doodle.design.messaging.PacketMapping;
+import org.doodle.design.messaging.PacketMapping.Inbound;
+import org.doodle.design.messaging.PacketMapping.Outbound;
+import org.doodle.design.messaging.PacketMapping.Protocol;
 import org.doodle.design.messaging.PacketPayload;
 import org.junit.Test;
 import org.springframework.context.support.StaticApplicationContext;
@@ -100,11 +103,13 @@ public class PacketMappingMessageHandlerTests {
     return messageHandler;
   }
 
-  @PacketMapping(inbound = @PacketMapping.Protocol(11))
+  @PacketMapping(inbound = @Inbound(11), outbound = @Outbound(11))
   @Controller
   static class TestController {
 
-    @PacketMapping(inbound = @PacketMapping.Protocol(11))
+    @PacketMapping(
+        inbound = @Inbound(11),
+        outbound = @Outbound(targets = @Protocol(cmd = 1, target = String.class)))
     public String handleString(@Header("destination") String destination, String payload) {
       return payload + "::response";
     }

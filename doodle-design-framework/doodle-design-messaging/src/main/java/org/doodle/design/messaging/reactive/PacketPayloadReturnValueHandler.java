@@ -15,9 +15,9 @@
  */
 package org.doodle.design.messaging.reactive;
 
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
+import org.doodle.design.messaging.PacketMapping;
 import org.doodle.design.messaging.PacketPayload;
 import org.doodle.design.messaging.PacketPayloadUtils;
 import org.springframework.core.MethodParameter;
@@ -26,12 +26,13 @@ import org.springframework.core.codec.Encoder;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.lang.Nullable;
 import org.springframework.messaging.Message;
-import org.springframework.messaging.handler.invocation.reactive.AbstractEncoderMethodReturnValueHandler;
+import org.springframework.messaging.handler.invocation.reactive.AbstractPacketEncoderMethodReturnValueHandler;
 import org.springframework.util.Assert;
+import org.springframework.util.CollectionUtils;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public class PacketPayloadReturnValueHandler extends AbstractEncoderMethodReturnValueHandler {
+public class PacketPayloadReturnValueHandler extends AbstractPacketEncoderMethodReturnValueHandler {
 
   public static final String RESPONSE_HEADER = "packetResponse";
 
@@ -47,6 +48,42 @@ public class PacketPayloadReturnValueHandler extends AbstractEncoderMethodReturn
     Assert.notNull(responseRef, "Missing '" + RESPONSE_HEADER + "'");
     responseRef.set(encodedContent.map(PacketPayloadUtils::createPayload));
     return Mono.empty();
+  }
+
+  @Override
+  protected Map<String, Object> handleHints(
+      Object returnValue, MethodParameter returnType, Message<?> message) {
+    PacketMapping typeAnnotation =
+        returnType.getDeclaringClass().getAnnotation(PacketMapping.class);
+    PacketMapping methodAnnotation = returnType.getMethodAnnotation(PacketMapping.class);
+    if (Objects.isNull(methodAnnotation) || methodAnnotation.outbound().targets().length == 0) {
+      return Collections.emptyMap();
+    }
+    Map<String, Object> hits = new HashMap<>();
+    for (PacketMapping.Protocol protocol : methodAnnotation.outbound().targets()) {
+      if (returnValue.getClass().equals(protocol.target())) {
+        if (protocol.value() > 0) {
+          int group = protocol.group();
+          if (group == 0) {
+            group = methodAnnotation.outbound().value();
+          }
+          if (group == 0 && Objects.nonNull(typeAnnotation)) {
+            group = typeAnnotation.outbound().value();
+          }
+
+          if (group != 0) {
+            hits.put("target.group", group);
+            hits.put("target.cmd", protocol.value());
+          }
+        }
+      }
+    }
+
+    if (CollectionUtils.isEmpty(hits)) {
+      return Collections.emptyMap();
+    }
+
+    return hits;
   }
 
   @Override

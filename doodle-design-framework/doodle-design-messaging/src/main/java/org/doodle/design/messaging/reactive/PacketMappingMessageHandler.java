@@ -18,6 +18,7 @@ package org.doodle.design.messaging.reactive;
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Method;
 import java.util.*;
+import java.util.stream.Stream;
 import lombok.Getter;
 import lombok.Setter;
 import org.doodle.design.messaging.PacketMapping;
@@ -121,7 +122,7 @@ public class PacketMappingMessageHandler
   @Nullable
   protected CompositeMessageCondition getCondition(AnnotatedElement element) {
     PacketMapping ann = AnnotatedElementUtils.findMergedAnnotation(element, PacketMapping.class);
-    if (Objects.isNull(ann) || ann.inbound().length == 0) {
+    if (Objects.isNull(ann) || ann.inbound().value() == 0) {
       return null;
     }
 
@@ -130,9 +131,9 @@ public class PacketMappingMessageHandler
         new DestinationPatternsMessageCondition(patterns, obtainRouteMatcher()));
   }
 
-  protected String[] processDestinations(PacketMapping.Protocol[] protocols) {
-    return Arrays.stream(protocols)
-        .mapToInt(PacketMapping.Protocol::value)
+  protected String[] processDestinations(PacketMapping.Inbound... inbound) {
+    return Stream.of(inbound)
+        .mapToInt(PacketMapping.Inbound::value)
         .mapToObj(String::valueOf)
         .toArray(String[]::new);
   }
@@ -146,7 +147,6 @@ public class PacketMappingMessageHandler
         results.add(pattern);
       }
     }
-
     return results;
   }
 
