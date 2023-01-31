@@ -25,15 +25,6 @@ jobs:
         run: ./mvnw install
         working-directory: org-doodle/doodle-build
 
-      - name: Checkout doodle-boot
-        uses: actions/checkout@v3
-        with:
-          repository: org-doodle/doodle-boot
-          path: org-doodle/doodle-boot
-      - name: Install doodle-boot
-        run: ./mvnw install
-        working-directory: org-doodle/doodle-boot
-
       - name: Checkout coding style
         run: ./mvnw spotless:check
 
