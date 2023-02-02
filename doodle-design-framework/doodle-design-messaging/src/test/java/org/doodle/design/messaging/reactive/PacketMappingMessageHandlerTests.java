@@ -21,12 +21,10 @@ import java.time.Duration;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 import org.doodle.design.messaging.PacketMapping;
 import org.doodle.design.messaging.PacketMapping.Inbound;
 import org.doodle.design.messaging.PacketMapping.Outbound;
 import org.doodle.design.messaging.PacketMapping.Protocol;
-import org.doodle.design.messaging.PacketPayload;
 import org.junit.Test;
 import org.springframework.context.support.StaticApplicationContext;
 import org.springframework.core.ReactiveAdapterRegistry;
@@ -66,8 +64,6 @@ public class PacketMappingMessageHandlerTests {
     headers.setHeader(
         DestinationPatternsMessageCondition.LOOKUP_DESTINATION_HEADER,
         new SimpleRouteMatcher(new AntPathMatcher()).parseRoute(destination));
-    AtomicReference<Flux<PacketPayload>> payloadRef = new AtomicReference<>();
-    headers.setHeader(PacketPayloadReturnValueHandler.RESPONSE_HEADER, payloadRef);
     return MessageBuilder.createMessage(payload, headers.getMessageHeaders());
   }
 
@@ -93,9 +89,6 @@ public class PacketMappingMessageHandlerTests {
     context.refresh();
 
     PacketMappingMessageHandler messageHandler = new PacketMappingMessageHandler();
-    messageHandler
-        .getReturnValueHandlerConfigurer()
-        .addCustomHandler(new PacketPayloadReturnValueHandler(encoders, registry));
     messageHandler.setApplicationContext(context);
     messageHandler.setDecoders(decoders);
     messageHandler.afterPropertiesSet();
@@ -110,8 +103,6 @@ public class PacketMappingMessageHandlerTests {
     @PacketMapping(
         inbound = @Inbound(11),
         outbound = @Outbound(targets = @Protocol(cmd = 1, target = String.class)))
-    public String handleString(@Header("destination") String destination, String payload) {
-      return payload + "::response";
-    }
+    public void handleString(@Header("destination") String destination, String payload) {}
   }
 }
