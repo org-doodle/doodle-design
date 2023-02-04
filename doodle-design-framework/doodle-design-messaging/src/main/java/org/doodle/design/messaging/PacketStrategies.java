@@ -22,6 +22,7 @@ import org.springframework.core.codec.Encoder;
 import org.springframework.core.io.buffer.DataBufferFactory;
 import org.springframework.lang.Nullable;
 import org.springframework.util.MimeType;
+import org.springframework.util.RouteMatcher;
 
 public interface PacketStrategies {
 
@@ -49,6 +50,8 @@ public interface PacketStrategies {
     throw new IllegalArgumentException("No decoder for " + elementType);
   }
 
+  RouteMatcher routeMatcher();
+
   DataBufferFactory dataBufferFactory();
 
   PacketMetadataExtractor metadataExtractor();
@@ -58,6 +61,12 @@ public interface PacketStrategies {
     Builder encoder(Encoder<?>... encoder);
 
     Builder decoder(Decoder<?>... decoder);
+
+    Builder routeMatcher(@Nullable RouteMatcher routeMatcher);
+
+    Builder dataBufferFactory(@Nullable DataBufferFactory dataBufferFactory);
+
+    Builder metadataExtractor(@Nullable PacketMetadataExtractor metadataExtractor);
 
     PacketStrategies build();
   }
