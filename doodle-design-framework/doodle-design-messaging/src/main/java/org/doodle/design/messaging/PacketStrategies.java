@@ -55,6 +55,10 @@ public interface PacketStrategies {
 
   interface Builder {
 
+    Builder encoder(Encoder<?>... encoder);
+
+    Builder decoder(Decoder<?>... decoder);
+
     PacketStrategies build();
   }
 }
