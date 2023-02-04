@@ -20,5 +20,7 @@ import org.springframework.util.MimeType;
 
 public interface PacketMetadataExtractor {
 
+  String ROUTE_KEY = "packetRoute";
+
   Map<String, Object> extract(PacketPayload payload, MimeType metadataMimeType);
 }
