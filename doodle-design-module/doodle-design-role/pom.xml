@@ -20,5 +20,9 @@
       <artifactId>lombok</artifactId>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>org.doodle</groupId>
+      <artifactId>doodle-design-messaging</artifactId>
+    </dependency>
   </dependencies>
 </project>
