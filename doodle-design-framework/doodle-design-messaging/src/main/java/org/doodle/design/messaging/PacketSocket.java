@@ -16,7 +16,6 @@
 package org.doodle.design.messaging;
 
 import reactor.core.Disposable;
-import reactor.core.publisher.Mono;
 
 public interface PacketSocket extends Disposable {
   void send(PacketPayload payload);
