@@ -59,7 +59,7 @@ public class PacketMappingMessageHandler
   private ConversionService conversionService = new DefaultFormattingConversionService();
 
   public PacketMappingMessageHandler() {
-    setHandlerPredicate(type -> AnnotatedElementUtils.isAnnotated(type, Controller.class));
+    setHandlerPredicate(type -> AnnotatedElementUtils.hasAnnotation(type, Controller.class));
   }
 
   public void setDecoders(List<? extends Decoder<?>> decoders) {
@@ -96,6 +96,7 @@ public class PacketMappingMessageHandler
     resolvers.add(new HeadersMethodArgumentResolver());
     resolvers.add(new DestinationVariableMethodArgumentResolver(this.conversionService));
     resolvers.addAll(getArgumentResolverConfigurer().getCustomResolvers());
+    resolvers.add(new PacketRequesterMethodArgumentResolver());
     resolvers.add(
         new PayloadMethodArgumentResolver(
             getDecoders(), this.validator, getReactiveAdapterRegistry(), true));
