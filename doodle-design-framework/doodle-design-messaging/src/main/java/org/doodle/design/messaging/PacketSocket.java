@@ -19,8 +19,7 @@ import reactor.core.Disposable;
 import reactor.core.publisher.Mono;
 
 public interface PacketSocket extends Disposable {
-
-  Mono<Void> send(PacketPayload payload);
+  void send(PacketPayload payload);
 
   PacketSocket onReadIdle(long idleTimeout, Runnable onReadIdle);
 }
