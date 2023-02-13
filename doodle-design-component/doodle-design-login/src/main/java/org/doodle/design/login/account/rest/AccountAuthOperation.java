@@ -13,12 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.doodle.design.login.account;
+package org.doodle.design.login.account.rest;
 
-import lombok.Data;
+import org.doodle.design.common.CommonResult;
 
-@Data
-public class AccountAuthRequest {
-  protected String username;
-  protected String password;
+@FunctionalInterface
+public interface AccountAuthOperation<
+    AccountAuthRequestT extends AccountAuthRequest,
+    AccountAuthResponseT extends AccountAuthResponse> {
+
+  CommonResult<AccountAuthResponseT> auth(AccountAuthRequestT request);
 }

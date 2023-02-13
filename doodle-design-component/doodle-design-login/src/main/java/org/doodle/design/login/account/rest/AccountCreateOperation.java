@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.doodle.design.login.account;
+package org.doodle.design.login.account.rest;
 
 import org.doodle.design.common.CommonResult;
 
@@ -21,5 +21,5 @@ import org.doodle.design.common.CommonResult;
 public interface AccountCreateOperation<
     AccountCreateRequestT extends AccountCreateRequest,
     AccountCreateResponseT extends AccountCreateResponse> {
-  CommonResult<AccountCreateResponseT> create(AccountAuthRequest request);
+  CommonResult<AccountCreateResponseT> create(AccountCreateRequestT request);
 }

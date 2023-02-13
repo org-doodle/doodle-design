@@ -13,42 +13,48 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.doodle.design.login.account;
+package org.doodle.design.login.account.rest;
+
+import static org.doodle.design.login.LoginRestMapping.ACCOUNT_AUTH_MAPPING;
+import static org.doodle.design.login.LoginRestMapping.ACCOUNT_CREATE_MAPPING;
+import static org.doodle.design.login.LoginRestMapping.ACCOUNT_MAPPING;
 
 import java.util.Objects;
 import org.doodle.design.common.CommonResult;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController("login.account")
-public abstract class AccountController<
+@RestController
+@RequestMapping(ACCOUNT_MAPPING)
+public abstract class AccountRestController<
         AccountCreateRequestT extends AccountCreateRequest,
         AccountCreateResponseT extends AccountCreateResponse,
-        AccountLoginRequestT extends AccountAuthRequest,
+        AccountAuthRequestT extends AccountAuthRequest,
         AccountLoginResponseT extends AccountAuthResponse>
     implements AccountCreateOperation<AccountCreateRequestT, AccountCreateResponseT>,
-        AccountAuthOperation<AccountLoginRequestT, AccountLoginResponseT> {
+        AccountAuthOperation<AccountAuthRequestT, AccountLoginResponseT> {
 
   protected final AccountCreateOperation<AccountCreateRequestT, AccountCreateResponseT>
       createOperation;
-  protected final AccountAuthOperation<AccountLoginRequestT, AccountLoginResponseT> authOperation;
+  protected final AccountAuthOperation<AccountAuthRequestT, AccountLoginResponseT> authOperation;
 
-  public AccountController(
+  public AccountRestController(
       AccountCreateOperation<AccountCreateRequestT, AccountCreateResponseT> createOperation,
-      AccountAuthOperation<AccountLoginRequestT, AccountLoginResponseT> authOperation) {
+      AccountAuthOperation<AccountAuthRequestT, AccountLoginResponseT> authOperation) {
     this.createOperation = Objects.requireNonNull(createOperation);
     this.authOperation = Objects.requireNonNull(authOperation);
   }
 
-  @PostMapping(path = "create")
+  @PostMapping(ACCOUNT_CREATE_MAPPING)
   @Override
-  public CommonResult<AccountCreateResponseT> create(AccountAuthRequest request) {
+  public CommonResult<AccountCreateResponseT> create(AccountCreateRequestT request) {
     return this.createOperation.create(request);
   }
 
-  @PostMapping(path = "auth")
+  @PostMapping(ACCOUNT_AUTH_MAPPING)
   @Override
-  public CommonResult<AccountLoginResponseT> auth(AccountAuthRequest request) {
+  public CommonResult<AccountLoginResponseT> auth(AccountAuthRequestT request) {
     return this.authOperation.auth(request);
   }
 }

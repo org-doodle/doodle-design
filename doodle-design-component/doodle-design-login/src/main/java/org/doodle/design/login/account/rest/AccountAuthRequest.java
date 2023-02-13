@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.doodle.design.login.account;
+package org.doodle.design.login.account.rest;
 
 import lombok.Data;
 
 @Data
-public class AccountCreateRequest {
+public class AccountAuthRequest {
   protected String username;
   protected String password;
 }

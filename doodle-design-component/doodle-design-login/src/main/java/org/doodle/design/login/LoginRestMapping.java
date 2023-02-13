@@ -13,11 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.doodle.design.login.account;
+package org.doodle.design.login;
 
-import lombok.Data;
-
-@Data
-public class AccountAuthResponse {
-  protected String token;
+public interface LoginRestMapping {
+  String ACCOUNT_MAPPING = "/login/account";
+  String ACCOUNT_CREATE_MAPPING = ACCOUNT_MAPPING + "/create";
+  String ACCOUNT_AUTH_MAPPING = ACCOUNT_MAPPING + "/auth";
 }
