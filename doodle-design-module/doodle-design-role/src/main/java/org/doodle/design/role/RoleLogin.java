@@ -18,8 +18,4 @@ package org.doodle.design.role;
 import lombok.Data;
 
 @Data
-public abstract class RoleBase<RoleLoginT extends RoleLogin, RolePaymentT extends RolePayment> {
-  public abstract RoleLoginT login();
-
-  public abstract RolePaymentT payment();
-}
+public abstract class RoleLogin {}
