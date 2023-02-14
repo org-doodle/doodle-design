@@ -6,17 +6,19 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.doodle</groupId>
-    <artifactId>doodle-design</artifactId>
+    <artifactId>doodle-design-component</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <artifactId>doodle-design-component</artifactId>
-  <packaging>pom</packaging>
-  <modules>
-    <module>doodle-design-admin</module>
-    <module>doodle-design-console</module>
-    <module>doodle-design-gateway</module>
-    <module>doodle-design-login</module>
-    <module>doodle-design-payment</module>
-  </modules>
+  <artifactId>doodle-design-gateway</artifactId>
+  <properties>
+    <spotless.skip>false</spotless.skip>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
 </project>
