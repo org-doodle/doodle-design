@@ -14,9 +14,6 @@
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <properties>
-    <protobuf.version>3.21.12</protobuf.version>
-    <os-maven-plugin.version>1.6.2</os-maven-plugin.version>
-    <protobuf-maven-plugin.version>0.6.1</protobuf-maven-plugin.version>
     <spotless.license-header.file>
       ${project.basedir}/../../src/checkstyle/license-header.txt
     </spotless.license-header.file>
