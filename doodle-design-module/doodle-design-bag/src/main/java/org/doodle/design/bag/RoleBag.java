@@ -13,24 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.doodle.design.role;
+package org.doodle.design.bag;
 
-import org.doodle.design.messaging.PacketRequester;
+import lombok.Data;
 
-public abstract class RoleRequester<
-        PacketRequesterT extends PacketRequester,
-        RoleLoginT extends RoleLogin,
-        RolePaymentT extends RolePayment,
-        RoleBaseT extends RoleBase<RoleLoginT, RolePaymentT>>
-    implements Role<RoleBaseT> {
-
-  protected final PacketRequesterT requester;
-
-  public RoleRequester(PacketRequesterT requester) {
-    this.requester = requester;
-  }
-
-  public PacketRequesterT requester() {
-    return this.requester;
-  }
-}
+@Data
+public abstract class RoleBag {}

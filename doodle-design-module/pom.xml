@@ -14,6 +14,7 @@
   <packaging>pom</packaging>
   <modules>
     <module>doodle-design-activity</module>
+    <module>doodle-design-bag</module>
     <module>doodle-design-friend</module>
     <module>doodle-design-guild</module>
     <module>doodle-design-mail</module>
