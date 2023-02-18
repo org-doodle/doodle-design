@@ -13,9 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.doodle.design.role;
+package org.doodle.design.bag;
 
-import lombok.Data;
+import org.doodle.design.common.packet.PacketController;
+import org.doodle.design.common.packet.PacketGroup;
+import org.doodle.design.messaging.PacketMapping;
+import org.doodle.design.messaging.PacketMapping.Inbound;
+import org.doodle.design.messaging.PacketRequester;
 
-@Data
-public abstract class RolePayment {}
+@PacketMapping(inbound = @Inbound(PacketGroup.BAG))
+public abstract class BagPacketController<
+        RoleBagT extends RoleBag, PacketRequesterT extends PacketRequester>
+    extends PacketController<PacketRequesterT> {}

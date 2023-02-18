@@ -13,26 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.doodle.design.role;
+package org.doodle.design.task;
 
+import org.doodle.design.common.packet.PacketController;
+import org.doodle.design.common.packet.PacketGroup;
+import org.doodle.design.messaging.PacketMapping;
+import org.doodle.design.messaging.PacketMapping.Inbound;
 import org.doodle.design.messaging.PacketRequester;
-import org.doodle.design.role.login.RoleLogin;
-import org.doodle.design.role.payment.RolePayment;
 
-public abstract class RoleRequester<
-        PacketRequesterT extends PacketRequester,
-        RoleLoginT extends RoleLogin,
-        RolePaymentT extends RolePayment,
-        RoleBaseT extends RoleBase<RoleLoginT, RolePaymentT>>
-    implements Role<RoleBaseT> {
-
-  protected final PacketRequesterT requester;
-
-  public RoleRequester(PacketRequesterT requester) {
-    this.requester = requester;
-  }
-
-  public PacketRequesterT requester() {
-    return this.requester;
-  }
-}
+@PacketMapping(inbound = @Inbound(PacketGroup.TASK))
+public abstract class TaskPacketController<
+        RoleTaskT extends RoleTask, PacketRequesterT extends PacketRequester>
+    extends PacketController<PacketRequesterT> {}

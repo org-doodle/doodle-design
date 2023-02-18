@@ -13,15 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.doodle.design.role;
+package org.doodle.design.common.routing;
 
-import lombok.Data;
-import org.doodle.design.role.login.RoleLogin;
-import org.doodle.design.role.payment.RolePayment;
-
-@Data
-public abstract class RoleBase<RoleLoginT extends RoleLogin, RolePaymentT extends RolePayment> {
-  public abstract RoleLoginT login();
-
-  public abstract RolePaymentT payment();
+public interface RoutingGroup {
+  String LOGIN = "login";
+  String ROLE = "role";
+  String PAYMENT = "payment";
+  String MAIL = "mail";
+  String BAG = "bag";
+  String TASK = "task";
+  String RANK = "rank";
+  String FRIEND = "friend";
+  String GUILD = "guild";
 }

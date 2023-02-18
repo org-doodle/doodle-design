@@ -13,15 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.doodle.design.role;
+package org.doodle.design.common.routing;
 
-import lombok.Data;
-import org.doodle.design.role.login.RoleLogin;
-import org.doodle.design.role.payment.RolePayment;
+import org.springframework.stereotype.Controller;
 
-@Data
-public abstract class RoleBase<RoleLoginT extends RoleLogin, RolePaymentT extends RolePayment> {
-  public abstract RoleLoginT login();
-
-  public abstract RolePaymentT payment();
-}
+@Controller
+public abstract class RoutingController {}

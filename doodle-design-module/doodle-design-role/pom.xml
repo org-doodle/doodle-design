@@ -22,6 +22,10 @@
     </dependency>
     <dependency>
       <groupId>org.doodle</groupId>
+      <artifactId>doodle-design-common</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.doodle</groupId>
       <artifactId>doodle-design-messaging</artifactId>
     </dependency>
   </dependencies>

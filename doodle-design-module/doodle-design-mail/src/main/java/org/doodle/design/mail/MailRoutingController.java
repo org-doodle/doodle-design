@@ -13,9 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.doodle.design.role;
+package org.doodle.design.mail;
 
-import lombok.Data;
+import org.doodle.design.common.routing.RoutingController;
+import org.doodle.design.common.routing.RoutingGroup;
+import org.springframework.messaging.handler.annotation.MessageMapping;
 
-@Data
-public abstract class RoleLogin {}
+@MessageMapping(RoutingGroup.MAIL)
+public abstract class MailRoutingController extends RoutingController {}

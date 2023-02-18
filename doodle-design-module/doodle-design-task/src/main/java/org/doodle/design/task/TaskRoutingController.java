@@ -13,15 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.doodle.design.role;
+package org.doodle.design.task;
 
-import lombok.Data;
-import org.doodle.design.role.login.RoleLogin;
-import org.doodle.design.role.payment.RolePayment;
+import org.doodle.design.common.routing.RoutingController;
+import org.doodle.design.common.routing.RoutingGroup;
+import org.springframework.messaging.handler.annotation.MessageMapping;
 
-@Data
-public abstract class RoleBase<RoleLoginT extends RoleLogin, RolePaymentT extends RolePayment> {
-  public abstract RoleLoginT login();
-
-  public abstract RolePaymentT payment();
-}
+@MessageMapping(RoutingGroup.TASK)
+public abstract class TaskRoutingController extends RoutingController {}

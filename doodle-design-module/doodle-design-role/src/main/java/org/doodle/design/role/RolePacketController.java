@@ -15,24 +15,19 @@
  */
 package org.doodle.design.role;
 
+import org.doodle.design.common.packet.PacketController;
+import org.doodle.design.common.packet.PacketGroup;
+import org.doodle.design.messaging.PacketMapping;
+import org.doodle.design.messaging.PacketMapping.Inbound;
 import org.doodle.design.messaging.PacketRequester;
 import org.doodle.design.role.login.RoleLogin;
 import org.doodle.design.role.payment.RolePayment;
 
-public abstract class RoleRequester<
-        PacketRequesterT extends PacketRequester,
+@PacketMapping(inbound = @Inbound(PacketGroup.ROLE))
+public abstract class RolePacketController<
         RoleLoginT extends RoleLogin,
         RolePaymentT extends RolePayment,
-        RoleBaseT extends RoleBase<RoleLoginT, RolePaymentT>>
-    implements Role<RoleBaseT> {
-
-  protected final PacketRequesterT requester;
-
-  public RoleRequester(PacketRequesterT requester) {
-    this.requester = requester;
-  }
-
-  public PacketRequesterT requester() {
-    return this.requester;
-  }
-}
+        RoleBaseT extends RoleBase<RoleLoginT, RolePaymentT>,
+        PacketRequesterT extends PacketRequester,
+        RoleRequesterT extends RoleRequester<PacketRequesterT, RoleLoginT, RolePaymentT, RoleBaseT>>
+    extends PacketController<PacketRequesterT> {}

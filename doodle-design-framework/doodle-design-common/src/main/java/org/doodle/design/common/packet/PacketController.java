@@ -13,26 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.doodle.design.role;
+package org.doodle.design.common.packet;
 
 import org.doodle.design.messaging.PacketRequester;
-import org.doodle.design.role.login.RoleLogin;
-import org.doodle.design.role.payment.RolePayment;
+import org.springframework.stereotype.Controller;
 
-public abstract class RoleRequester<
-        PacketRequesterT extends PacketRequester,
-        RoleLoginT extends RoleLogin,
-        RolePaymentT extends RolePayment,
-        RoleBaseT extends RoleBase<RoleLoginT, RolePaymentT>>
-    implements Role<RoleBaseT> {
-
-  protected final PacketRequesterT requester;
-
-  public RoleRequester(PacketRequesterT requester) {
-    this.requester = requester;
-  }
-
-  public PacketRequesterT requester() {
-    return this.requester;
-  }
-}
+@Controller
+public abstract class PacketController<PacketRequesterT extends PacketRequester> {}
