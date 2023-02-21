@@ -22,5 +22,12 @@ import org.doodle.design.messaging.PacketMapping.Inbound;
 import org.doodle.design.messaging.PacketRequester;
 
 @PacketMapping(inbound = @Inbound(PacketGroup.GUILD))
-public abstract class GuildPacketController<PacketRequesterT extends PacketRequester>
-    extends PacketController<PacketRequesterT> {}
+public abstract class GuildPacketController<
+        GuildExcelPropertiesT extends GuildExcelProperties,
+        PacketRequesterT extends PacketRequester>
+    extends PacketController<GuildExcelPropertiesT, PacketRequesterT> {
+
+  public GuildPacketController(GuildExcelPropertiesT excel) {
+    super(excel);
+  }
+}
