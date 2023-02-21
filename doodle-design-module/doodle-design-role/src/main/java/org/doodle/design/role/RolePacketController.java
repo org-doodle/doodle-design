@@ -25,9 +25,11 @@ import org.doodle.design.role.payment.RolePayment;
 
 @PacketMapping(inbound = @Inbound(PacketGroup.ROLE))
 public abstract class RolePacketController<
-        RoleLoginT extends RoleLogin,
-        RolePaymentT extends RolePayment,
-        RoleBaseT extends RoleBase<RoleLoginT, RolePaymentT>,
         PacketRequesterT extends PacketRequester,
-        RoleRequesterT extends RoleRequester<PacketRequesterT, RoleLoginT, RolePaymentT, RoleBaseT>>
+        RoleRequesterT extends
+            RoleRequester<
+                    PacketRequesterT,
+                    ? extends RoleLogin,
+                    ? extends RolePayment,
+                    ? extends RoleBase<? extends RoleLogin, ? extends RolePayment>>>
     extends PacketController<PacketRequesterT> {}
