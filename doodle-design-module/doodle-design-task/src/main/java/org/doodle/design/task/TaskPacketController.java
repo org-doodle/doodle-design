@@ -23,5 +23,12 @@ import org.doodle.design.messaging.PacketRequester;
 
 @PacketMapping(inbound = @Inbound(PacketGroup.TASK))
 public abstract class TaskPacketController<
-        RoleTaskT extends RoleTask, PacketRequesterT extends PacketRequester>
-    extends PacketController<PacketRequesterT> {}
+        TaskExcelPropertiesT extends TaskExcelProperties,
+        RoleTaskT extends RoleTask,
+        PacketRequesterT extends PacketRequester>
+    extends PacketController<TaskExcelPropertiesT, PacketRequesterT> {
+
+  public TaskPacketController(TaskExcelPropertiesT excel) {
+    super(excel);
+  }
+}

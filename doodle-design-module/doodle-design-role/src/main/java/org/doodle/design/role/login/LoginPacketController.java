@@ -23,5 +23,12 @@ import org.doodle.design.messaging.PacketRequester;
 
 @PacketMapping(inbound = @Inbound(PacketGroup.LOGIN))
 public class LoginPacketController<
-        RoleLoginT extends RoleLogin, PacketRequesterT extends PacketRequester>
-    extends PacketController<PacketRequesterT> {}
+        LoginExcelPropertieT extends LoginExcelProperties,
+        RoleLoginT extends RoleLogin,
+        PacketRequesterT extends PacketRequester>
+    extends PacketController<LoginExcelPropertieT, PacketRequesterT> {
+
+  public LoginPacketController(LoginExcelPropertieT excel) {
+    super(excel);
+  }
+}

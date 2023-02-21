@@ -22,5 +22,12 @@ import org.doodle.design.messaging.PacketRequester;
 
 @PacketMapping(inbound = @PacketMapping.Inbound(PacketGroup.PAYMENT))
 public abstract class PaymentPacketController<
-        RolePaymentT extends RolePayment, PacketRequesterT extends PacketRequester>
-    extends PacketController<PacketRequesterT> {}
+        PaymentExcelPropertiesT extends PaymentExcelProperties,
+        RolePaymentT extends RolePayment,
+        PacketRequesterT extends PacketRequester>
+    extends PacketController<PaymentExcelPropertiesT, PacketRequesterT> {
+
+  public PaymentPacketController(PaymentExcelPropertiesT excel) {
+    super(excel);
+  }
+}

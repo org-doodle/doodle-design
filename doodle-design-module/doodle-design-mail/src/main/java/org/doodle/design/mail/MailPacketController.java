@@ -23,5 +23,12 @@ import org.doodle.design.messaging.PacketRequester;
 
 @PacketMapping(inbound = @Inbound(PacketGroup.MAIL))
 public abstract class MailPacketController<
-        RoleMailT extends RoleMail, PacketRequesterT extends PacketRequester>
-    extends PacketController<PacketRequesterT> {}
+        MailExcelPropertiesT extends MailExcelProperties,
+        RoleMailT extends RoleMail,
+        PacketRequesterT extends PacketRequester>
+    extends PacketController<MailExcelPropertiesT, PacketRequesterT> {
+
+  public MailPacketController(MailExcelPropertiesT excel) {
+    super(excel);
+  }
+}

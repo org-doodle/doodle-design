@@ -15,4 +15,6 @@
  */
 package org.doodle.design.role.login;
 
-public class LoginExcelProperties {}
+import org.doodle.design.common.excel.ExcelProperties;
+
+public abstract class LoginExcelProperties extends ExcelProperties {}

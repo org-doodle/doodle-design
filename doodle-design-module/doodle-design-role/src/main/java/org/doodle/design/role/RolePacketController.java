@@ -25,6 +25,7 @@ import org.doodle.design.role.payment.RolePayment;
 
 @PacketMapping(inbound = @Inbound(PacketGroup.ROLE))
 public abstract class RolePacketController<
+        RoleExcelPropertiesT extends RoleExcelProperties,
         PacketRequesterT extends PacketRequester,
         RoleRequesterT extends
             RoleRequester<
@@ -32,4 +33,9 @@ public abstract class RolePacketController<
                     ? extends RoleLogin,
                     ? extends RolePayment,
                     ? extends RoleBase<? extends RoleLogin, ? extends RolePayment>>>
-    extends PacketController<PacketRequesterT> {}
+    extends PacketController<RoleExcelPropertiesT, PacketRequesterT> {
+
+  public RolePacketController(RoleExcelPropertiesT excel) {
+    super(excel);
+  }
+}

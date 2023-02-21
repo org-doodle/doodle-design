@@ -15,4 +15,6 @@
  */
 package org.doodle.design.role.payment;
 
-public class PaymentExcelProperties {}
+import org.doodle.design.common.excel.ExcelProperties;
+
+public abstract class PaymentExcelProperties extends ExcelProperties {}

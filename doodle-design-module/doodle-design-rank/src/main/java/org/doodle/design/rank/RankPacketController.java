@@ -22,5 +22,11 @@ import org.doodle.design.messaging.PacketMapping.Inbound;
 import org.doodle.design.messaging.PacketRequester;
 
 @PacketMapping(inbound = @Inbound(PacketGroup.RANK))
-public abstract class RankPacketController<PacketRequesterT extends PacketRequester>
-    extends PacketController<PacketRequesterT> {}
+public abstract class RankPacketController<
+        RankExcelPropertiesT extends RankExcelProperties, PacketRequesterT extends PacketRequester>
+    extends PacketController<RankExcelPropertiesT, PacketRequesterT> {
+
+  public RankPacketController(RankExcelPropertiesT excel) {
+    super(excel);
+  }
+}

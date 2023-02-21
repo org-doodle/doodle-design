@@ -23,5 +23,12 @@ import org.doodle.design.messaging.PacketRequester;
 
 @PacketMapping(inbound = @Inbound(PacketGroup.BAG))
 public abstract class BagPacketController<
-        RoleBagT extends RoleBag, PacketRequesterT extends PacketRequester>
-    extends PacketController<PacketRequesterT> {}
+        BagExcelPropertiesT extends BagExcelProperties,
+        RoleBagT extends RoleBag,
+        PacketRequesterT extends PacketRequester>
+    extends PacketController<BagExcelPropertiesT, PacketRequesterT> {
+
+  public BagPacketController(BagExcelPropertiesT excel) {
+    super(excel);
+  }
+}

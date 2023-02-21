@@ -23,5 +23,12 @@ import org.doodle.design.messaging.PacketRequester;
 
 @PacketMapping(inbound = @Inbound(PacketGroup.FRIEND))
 public abstract class FriendPacketController<
-        RoleFriendT extends RoleFriend, PacketRequesterT extends PacketRequester>
-    extends PacketController<PacketRequesterT> {}
+        FriendExcelPropertiesT extends FriendExcelProperties,
+        RoleFriendT extends RoleFriend,
+        PacketRequesterT extends PacketRequester>
+    extends PacketController<FriendExcelPropertiesT, PacketRequesterT> {
+
+  public FriendPacketController(FriendExcelPropertiesT excel) {
+    super(excel);
+  }
+}

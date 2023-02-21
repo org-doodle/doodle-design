@@ -15,8 +15,20 @@
  */
 package org.doodle.design.common.packet;
 
+import java.util.Objects;
+import org.doodle.design.common.excel.ExcelProperties;
 import org.doodle.design.messaging.PacketRequester;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 @Controller
-public abstract class PacketController<PacketRequesterT extends PacketRequester> {}
+public abstract class PacketController<
+    ExcelPropertiesT extends ExcelProperties, PacketRequesterT extends PacketRequester> {
+
+  protected final ExcelPropertiesT excel;
+
+  @Autowired
+  public PacketController(ExcelPropertiesT excel) {
+    this.excel = Objects.requireNonNull(excel);
+  }
+}
